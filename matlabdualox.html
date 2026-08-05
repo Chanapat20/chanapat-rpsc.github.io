@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chanapat's Website</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fdf0d5;
+            color: #222;
+        }
+
+        header {
+            min-height: 20vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px 20px;
+            background: #17395c;
+            color: white;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            font-size: clamp(30px, 7vw, 48px);
+            overflow-wrap: anywhere;
+        }
+        
+        header p {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        main {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            padding: 50px 20px;
+        }
+
+        .card {
+            background: white;
+            width: 100%;
+            max-width: fit-content;
+            overflow: hidden;
+            align-items: center;
+            padding: 1px 30px 30px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h1 {
+            margin-bottom: 10px;
+            font-size: 48px;
+        }
+        
+        .card p {
+            width: 100%;
+            max-width: 800px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        footer {
+            width: 100%;
+            padding: 25px;
+            text-align: center;
+            background: #17395c;
+            color: white;
+        }
+        .button {
+            display: inline-block;
+            background-color: #520610;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .button:hover {
+            background-color: #831221;
+        }
+
+        .contact {
+            background-color: #2f4e33;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .contact:hover {
+            background-color: #49754f;
+        }
+
+        .codecard {
+            background: rgb(26, 25, 27);
+            width: 100%;
+            max-width: fit-content;
+            align-items: center;
+            overflow: hidden;
+            padding: 1px 30px 30px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: rgb(42, 228, 104);
+        }
+        pre {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            padding: 20px;
+            margin: 0;
+            background-color: #18181b;
+            color: #00ff66;
+            border-radius: 8px;
+            font-family: Consolas, monospace;
+            font-size: 14px;}
+
+        pre code {
+            display: block;
+            font-family: Consolas, monospace;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="card">
+            <h2><b>Code</b>: Dual-Oxidant Corrosion Modeling</h2>
+            <div class="codecard">
+                <pre><code>
+clc
+clear
+close all
+
+%Domain Settings
+dx = 2.5e-2;
+dt = 5e-1;
+nx = 100; %Try adjusting it to 10 nodes to magnify
+nt = 20000;
+Length = dx*nx;
+Time = nt*dt;
+x = linspace(0,Length,nx+1);
+t = linspace(0,Time,nt+1);
+N = nx + 1;
+%For plotting
+nodes = 1:N;
+
+%Parameters
+alpha1 = 1e-5;
+alpha2 = 1e-5;
+w1 = 5e-3;
+w2 = 5e-3;
+Xo_m = 0.4;
+Xs_m = 0.4;
+Xo_mo = 0.75;
+Xs_ms = 0.75;
+Xo_ms = 0.5;
+Xs_mo = 0.5;
+XO_surf = 1;   
+L1 = 1;
+L2 = 1;
+Mbar = 2.5e-4;
+MO = 2.5e-4;
+MS = 2.5e-4;
+gammaO = 1e-5;
+gammaS = 1e-5;
+
+h = @(e) e.^3 .* (6*e.^2 - 15*e + 10);
+g = @(e) e.^2 .* (1 - e).^2;
+dh = @(e) 30*e.^2.*(e - 1).^2;
+dg = @(e) 2*e.*(1 - e).*(1 - 2*e);
+
+%Initial Condition
+eta1 = zeros(1,N); %Change to rand(1,N) to match the paper
+eta2 = ones(1,N);
+oxide_thickness_nodes = 5;
+eta2(1:oxide_thickness_nodes) = 0;
+eta1(1:oxide_thickness_nodes) = 1;
+X_O = zeros(1,N);
+X_O(1:oxide_thickness_nodes) = XO_surf;
+X_S = zeros(1,N);
+
+%Plot Intial
+fig1 = figure('Name', 'Initial State (t = 0 sec)');
+plot(nodes, eta1, 'r-', 'LineWidth', 2); hold on;
+plot(nodes, eta2, 'y--', 'LineWidth', 2);
+plot(nodes, X_O,  'b-.', 'LineWidth', 2);
+plot(nodes, X_S,  'g:', 'LineWidth', 2);
+hold off;
+xlabel('Position (nodes)'); ylabel('Order Parameter');
+legend('\eta_1 (Oxide)', '\eta_2 (Metal)', 'X_O (Oxygen)', 'X_S (Sulfur)');
+title('Initial State (t = 0)');
+ylim([-0.1 1.1]);
+grid on;
+
+%Live Graph
+fig2 = figure('Name', 'Live Evolution');
+h_eta1 = plot(nodes, eta1, 'r-', 'LineWidth', 2); hold on;
+h_eta2 = plot(nodes, eta2, 'y--', 'LineWidth', 2);
+h_XO   = plot(nodes, X_O,  'b-.', 'LineWidth', 2);
+h_XS   = plot(nodes, X_S,  'g:', 'LineWidth', 2);
+hold off;
+xlabel('Position (nodes)'); ylabel('Order Parameter');
+legend('\eta_1 (Oxide)', '\eta_2 (Metal)', 'X_O (Oxygen)', 'X_S (Sulfur)', 'Location', 'best');
+title('Live Evolution - Time: 0');
+ylim([-0.1 1.1]);
+grid on;
+
+for n = 1:nt+1
+%Allen-Cahn
+    %eta1
+    fm = (0.5*(X_O - Xo_m).^2 .* (X_S - Xs_m).^2);
+    fms = (0.5*(X_O - Xo_ms).^2 .* (X_S - Xs_ms).^2);
+    fmo = (0.5*(X_O - Xo_mo).^2 .* (X_S - Xs_mo).^2);
+    f0 = h(eta1).*fms + (1 - h(eta1)).*fmo + w1*g(eta1);
+    Localterm_eta1 = ((1 - h(eta2)).*(dh(eta1).*(fms - fmo) + w1*dg(eta1))+ w2*dg(eta1).*g(eta2));
+    lap = zeros(1,N);
+    lap(2:N-1) = (eta1(3:N) - 2*eta1(2:N-1) + eta1(1:N-2)) / dx^2;
+    rhs_eta1 = -L1*Localterm_eta1 + L1*alpha1*lap;
+    eta1_new = eta1 + dt*rhs_eta1;
+    %eta2
+    Localterm_eta2 = dh(eta2).*(fm - f0) + w2*g(eta1).*dg(eta2);
+    lap2 = zeros(1,N);
+    lap2(2:N-1) = (eta2(3:N) - 2*eta2(2:N-1) + eta2(1:N-2)) / dx^2;
+    rhs_eta2 = -L2*Localterm_eta2 + L2*alpha2*lap2; 
+    eta2_new = eta2 + dt*rhs_eta2;
+    %BC
+    %Left surface
+    eta1_new(1) = 0;
+    eta2_new(1) = 0;
+
+    %Right bulk metal side
+    eta1_new(N) = eta1_new(N-1); % zero-gradient for eta1
+    eta2_new(N) = 1; % bulk remains metal
+    %Update
+    eta1 = eta1_new;
+    eta2 = eta2_new;
+    
+    %Cahn-Hillard
+    lapX_O = zeros(1,N);
+    lapX_S = zeros(1,N);
+    lapX_O(2:N-1) = (X_O(3:N) - 2*(X_O(2:N-1)) + X_O(1:N-2))/ dx^2;
+    lapX_S(2:N-1) = (X_S(3:N) - 2*X_S(2:N-1) + X_S(1:N-2)) / dx^2;
+    A_O_local = h(eta2).*(X_O - Xo_m).*(X_S - Xs_m).^2 + (1-h(eta2)).*(h(eta1).*(X_O - Xo_ms).*(X_S - Xs_ms).^2 + (1-h(eta1)).*(X_O - Xo_mo).*(X_S - Xs_mo).^2 );
+    A_S_local = h(eta2).*(X_S - Xs_m).*(X_O - Xo_m).^2 + (1 - h(eta2)).*(h(eta1).*(X_S - Xs_ms).*(X_O - Xo_ms).^2 + (1 - h(eta1)).*(X_S - Xs_mo).*(X_O - Xo_mo).^2 );
+    A_O = A_O_local - (gammaO)*lapX_O;
+    A_S = A_S_local - (gammaS) * lapX_S;
+    lapA_O = zeros(1,N);
+    lapA_S = zeros(1,N);
+    lapA_O(2:N-1) = (A_O(3:N) - 2*A_O(2:N-1) + A_O(1:N-2)) / dx^2;
+    lapA_S(2:N-1) = (A_S(3:N) - 2*A_S(2:N-1) + A_S(1:N-2)) / dx^2;
+    % Update 
+    X_O_new = X_O + dt * MO * lapA_O;
+    X_S_new = X_S + dt * MS * lapA_S;
+    %BC 
+    X_O_new(1) = XO_surf; %Dirichlet at surface (XO_surf = 1)
+    X_O_new(N) = X_O_new(N-1); %Neuman at bulk end
+    X_S_new(:) = 0; %No Sulfidation => 0 if yes -> number.
+    %Update X
+    X_O = X_O_new; %Update X_O
+    X_S = X_S_new; %Update X_S
+    
+    %Live graph update(Updates every n time steps)
+    if mod(n, 20) == 0
+        set(h_eta1, 'YData', eta1);
+        set(h_eta2, 'YData', eta2);
+        set(h_XO, 'YData', X_O);
+        set(h_XS, 'YData', X_S);
+        title(['Live Evolution - Time: ', num2str(n*dt), ' / ', num2str(Time), '  [sec]']);
+        drawnow; 
+    end
+end
+
+%Plot Final
+fig3 = figure('Name', 'Final State');
+plot(nodes, eta1, 'r-', 'LineWidth', 2); hold on;
+plot(nodes, eta2, 'y--', 'LineWidth', 2);
+plot(nodes, X_O,  'b-.', 'LineWidth', 2);
+plot(nodes, X_S,  'g:', 'LineWidth', 2);
+hold off;
+xlabel('Position (nodes)'); ylabel('Order Parameter');
+legend('\eta_1 (Oxide)', '\eta_2 (Metal)', 'X_O (Oxygen)', 'X_S (Sulfur)');
+title(['Final State (Time  = ', num2str(Time), '  [sec] )']);
+ylim([-0.1 1.1]);
+grid on;
+                    
+                </code></pre>
+            </div>
+        </section>
+        
+    </main>
+    <section class="button-container">
+        <a href="mywebsite.html" target="_blank" class="button">Back to homepage</a>
+    </section>
+    <footer>
+        <p>© 2026 Chanapat Ritprasitchai</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
