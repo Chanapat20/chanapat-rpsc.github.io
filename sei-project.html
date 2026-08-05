@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chanapat's Website</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fdf0d5;
+            color: #222;
+        }
+
+        header {
+            min-height: 20vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px 20px;
+            background: #17395c;
+            color: white;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            font-size: clamp(30px, 7vw, 48px);
+            overflow-wrap: anywhere;
+        }
+        
+        header p {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        main {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            padding: 50px 20px;
+        }
+
+        .card {
+            background: white;
+            width: 100%;
+            align-items: center;
+            padding: 1px 30px 30px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h1 {
+            margin-bottom: 10px;
+            font-size: 48px;
+        }
+        
+        .card p {
+            width: 100%;
+            max-width: 800px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        footer {
+            width: 100%;
+            padding: 25px;
+            text-align: center;
+            background: #17395c;
+            color: white;
+        }
+        .button {
+            display: inline-block;
+            background-color: #520610;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .button:hover {
+            background-color: #831221;
+        }
+
+        .contact {
+            background-color: #2f4e33;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .contact:hover {
+            background-color: #49754f;
+        }
+        
+        .button-container {
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>SEI simulation using AIPFM</h1>
+        <h3>(Literature Review)</h3>
+    </header>
+
+    <main>
+        <section class="card">
+                <h3><b>Detail</b></h3>
+            <p>
+                This review focuses on the application of the Allen-Cahn phase-field model (AIPFM) to simulate the formation and growth of the solid electrolyte interphase (SEI) and dendritic structures at the electrode–electrolyte interface. The AIPFM is a mathematical framework that describes the evolution of phase boundaries in materials, making it suitable for modeling complex electrochemical processes.
+            </p>
+            <p>
+                This review uses MATLAB as a tool to implement and visualize the phase-field models discussed in the literature. The MATLAB code will be used to simulate the formation and growth of the SEI and dendritic structures, allowing for a better understanding of the underlying mechanisms and the effects of different parameters on the simulation process.
+            </p>    
+            <p>
+                <b>Source</b>: Simulating solid electrolyte interphase formation spanning 108 time scales with an atomically informed phase-field mode article. 
+            </p>
+            <a href="https://pubs.rsc.org/en/content/articlelanding/2025/ee/d5ee01030f" target="_blank" class="button">Original document
+            </a>
+            
+            <a  href="matlabsei.html" target="_blank" class="button">My MATLAB code</a>
+        </section>
+
+        <section class="card">
+            <h2>Result Gallery</h2>
+            <img src="Images\SEI1.png" alt="Simulation Result" style="width: 100%; max-width: 350px; margin-bottom: 15px; align-items: center;">
+            <img src="Images\SEI2.png" alt="Simulation Result" style="width: 100%; max-width: 350px; margin-bottom: 15px; align-items: center;">
+        </section>
+    </main>
+    <section class="button-container">
+        <a href="mywebsite.html" target="_blank" class="button">Back to homepage</a>
+    </section>
+    <footer>
+        <p>© 2026 Chanapat Ritprasitchai</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
