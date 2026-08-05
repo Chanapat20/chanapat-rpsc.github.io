@@ -10,6 +10,13 @@
         * {
             box-sizing: border-box;
         }
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
 
         body {
             margin: 0;
@@ -20,6 +27,7 @@
 
         header {
             min-height: 20vh;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -32,16 +40,20 @@
 
         header h1 {
             margin-bottom: 10px;
-            font-size: 48px;
+            font-size: clamp(30px, 7vw, 48px);
+            overflow-wrap: anywhere;
         }
         
         header p {
-            max-width: 100%;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0;
             font-size: 16px;
             line-height: 1.6;
         }
 
         main {
+            width: 100%;
             max-width: 900px;
             margin: auto;
             padding: 50px 20px;
@@ -49,7 +61,7 @@
 
         .card {
             background: white;
-            width: 900px;
+            width: 100%;
             align-items: center;
             padding: 1px 30px 30px;
             margin-bottom: 25px;
@@ -63,12 +75,14 @@
         }
         
         .card p {
+            width: 100%;
             max-width: 800px;
             font-size: 16px;
             line-height: 1.6;
         }
 
         footer {
+            width: 100%;
             padding: 25px;
             text-align: center;
             background: #17395c;
@@ -101,6 +115,14 @@
             background-color: #49754f;
         }
 
+        .button-container {
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
     </style>
 </head>
 
@@ -124,6 +146,7 @@
             </p>
             <p>
                 I am a motivated Materials & Metallurgical Engineering student at Chulalongkorn University with hands-on experience in math modeling and FEA. Strong foundation in transport phenomena, diffusion analysis. I have an interest in batteries, corrosion of metals, semiconductors, and advanced materials research.
+            </p>
             <h2>
                 Education
             </h2>
@@ -137,25 +160,29 @@
         <section class="card">
             <h2>My Achievements</h2>
             <h3>Bangchak Internship Project Competition | 2026</h3>
-            <p>
-                <li>Won first place in the Bangchak Internship Project Competition 2026. The project involved developing RT film thickness reading and interpreting by using AI.
-            </p>
+            <ul>
+                <li>first place in the Bangchak Internship Project Competition 2026. The project involved developing RT film thickness reading and interpreting by using AI.</li>
+            </ul>
+            <img src="Images\winner.jpg" alt="Winner" style="width: 100%; max-width: 250px; margin-bottom: 1px; align-items: center;">
         </section>
         <section class="card">
             <h2>My Experience</h2>
             <h3>Internship at Bangchak corporation | 2026</h3>
-            <p>
-                <li>Completed a 2-month internship at Bangchak Corporation.
-            </p>
+            <ul>
+                <li>Completed a 2-month internship at Bangchak Corporation.</li>
+            </ul>
+            <img src="Images\certificatebcp.png" alt="Certificate" style="width: 100%; max-width: 250px; margin-bottom: 1px; align-items: center;">
             <h3>Larngear Camp 25th | 2025</h3>
-            <p>
-                <li>Helped design and run a workshop for high school students. The activity involved teaching students through a fruit battery experiment using limes as an electrolyte, turning metal pieces into electrodes. Through the activity, I explained the fundamental concepts of galvanic cells and EMF table application.
-            </p>
+            <ul>
+                <li>Helped design and run a workshop for high school students. The activity involved teaching students through a fruit battery experiment using limes as an electrolyte, turning metal pieces into electrodes. Through the activity, I explained the fundamental concepts of galvanic cells and EMF table application.</li>
+            </ul>
+            <img src="Images\fruitbattery.jpg" alt="Larngear Camp" style="width: 100%; max-width: 250px; margin-bottom: 1px; align-items: center;">
+            <img src="Images\fruitbattery2.jpg" alt="Larngear Camp" style="width: 100%; max-width: 250px; margin-bottom: 1px; align-items: center;">
+            <img src="Images\fruitbattery3.jpg" alt="Larngear Camp" style="width: 100%; max-width: 250px; margin-bottom: 1px; align-items: center;">
             <h3>Department of Metallurgy and Materials | 2025</h3>
-            <p>
-                <li>Undergraduate Research Assistant, Study and develop math models for simulation of dendrites formation in batteries.
-
-            </p>
+            <ul>
+                <li>Undergraduate Research Assistant, Study and develop math models for simulation of dendrites formation in batteries.</li>
+            </ul>
         </section>  
         <section class="card">
             <h2>My Projects</h2>
@@ -164,7 +191,7 @@
             <p>This simulation investigates the formation and growth of the solid electrolyte interphase (SEI) and dendritic structures at the electrode–electrolyte interface. By modelling electrochemical reactions, ion transport, and phase evolution, the simulation visualizes how variations in reaction rates and local material properties can cause non-uniform growth.
             </p>
             <a href="sei-project.html" class="button">More detail</a>
-            <h3>Simulations of Metal oxides under dual oxidants.</h3>
+            <h3>Simulations of Phase-field modeling of corrosion kinetics under dual-oxidants</h3>
             <p>This simulation investigates the formation and evolution of metal oxides when a material is exposed to two oxidizing species simultaneously. By modelling diffusion, interfacial reactions, and oxide-layer growth, it shows how the two oxidants may compete or interact to influence oxidation rate, phase formation, and oxide stability.
             </p>
             <a href="oxide-project.html" class="button">More detail</a>
@@ -183,7 +210,6 @@
             <a href="https://www.linkedin.com/in/chanapat-rpsc/" class="contact">Linkedin</a>    
         </section>
     </main>
-
     <footer>
         <p>© 2026 Chanapat Ritprasitchai</p>
     </footer>
