@@ -15,7 +15,7 @@
             margin: 0;
             width: 100%;
             min-height: 100%;
-            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         body {
@@ -122,12 +122,43 @@
             display: flex;
             justify-content: center;
         }
+        .navbar {
+            background-color: #375879;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #f4c95d;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
     </style>
 </head>
 
 <body>
-
+    
     <header>
         <h1>Chanapat Ritprasitchai</h1>
         <p>
@@ -135,9 +166,21 @@
             in artificial intelligence, machine learning and engineering.
         </p>
     </header>
-
+    <nav class="navbar">
+        <img src="Images\logo.png" alt="Logo" style="width: 50%; max-width: 100px; height: auto; padding: 0px;">
+    <div class="nav-links">
+        <a href="mywebsite.html">Home</a>
+        <a href="#about">About</a>
+        <a href="#achievement">Achievement</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </div>
+    </nav>
+    
     <main>
         <section class="card">
+            <section id="about"> </section  >
             <h2>About Me</h2>
             <p> </p>
             <p>
@@ -153,19 +196,21 @@
             <ul>
                 <li>B.Eng. in Materials and Metallurgical Engineering, Chulalongkorn University, Bangkok, Thailand (2023 - 2026)</li>
                 <br>
-                <li>High school, Suankularb Wittayalai School, Bangkok, Thailand (GPAX: 3.80)</li>
+                <li>High school, Suankularb Wittayalai School, Bangkok, Thailand (GPA: 3.80)</li>
             </ul>
         </section>
 
         <section class="card">
+            <section id="achievement"></section>
             <h2>My Achievements</h2>
             <h3>Bangchak Internship Project Competition | 2026</h3>
             <ul>
-                <li>First place in the Bangchak Internship Project Competition 2026. The project involved developing RT film thickness reading and interpreting by using AI.</li>
+                <li>first place in the Bangchak Internship Project Competition 2026. The project involved developing RT film thickness reading and interpreting by using AI.</li>
             </ul>
             <img src="Images\winner.jpg" alt="Winner" style="width: 100%; max-width: 250px; margin-bottom: 1px; align-items: center;">
         </section>
         <section class="card">
+            <section id="experience"></section>
             <h2>My Experience</h2>
             <h3>Internship at Bangchak corporation | 2026</h3>
             <ul>
@@ -185,6 +230,7 @@
             </ul>
         </section>  
         <section class="card">
+            <section id="projects"></section>
             <h2>My Projects</h2>
             <p> </p>
             <h3>Simulations of SEI dendrite formation. </h3>
@@ -204,6 +250,7 @@
         </section>
         
         <section class="card">
+            <section id="contact"></section>    
             <h2>Contact</h2>
             <p> 
             </p>
